@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Tracker</title>
+    <style>
+      body {
+        background-color: rgb(244, 238, 230);
+      }
+    </style>
+</head>
+<body style="margin: 0; display: flex; flex-direction: column; min-height: 100vh;">
+    <div style="flex: 1;">
+<body><center>
+<section>
+    
+        <h1>Personal Budget Tracker</h1>
+        <!-- <a href="index.html">Add Income/Expense</a><br>
+        <a href="index.html">View budget Summary</a> -->
+    
+</section>
+<section>
+    <h2>Welcome to Personal Budget Tracker</h2>
+    <p>This Tracker helps you to manage your monthly income and expenses.You can add new entries and view a detailed summary of you budget</p>
+</section>
+<section id="add-income-expense">
+    <h3>Add New Income or Expense</h3>
+        <form id="budgetform"><div>
+            <label for="Income">Income</label>
+            <input type="number" id="Income" name="income"><br>
+         </div><br>
+
+
+            <div>
+            <label for="Expense">Expense</label>
+            <input type="number" id="Expense" name="expense"><br></div><br>
+
+            
+            <label for="Category">Category</label>
+            <select id="Category" name="Category">
+            <option value="Food"> Food</option>
+            <option value="transportation"> transportation</option>
+            <option value="Entertainment">Entertainment</option>
+            </select> <br><br>
+            <label for="Description">Description</label>
+            <input type="text" id="Description"><br><br>
+            <label for="date" >Date:</label>
+            <input type="date"  id="date"><br><br>
+            <label for="type" id="type">Type</label>
+            <input type="checkbox" id="income" name="type">Income 
+            <input type="checkbox" id="expense" name="type">Expense<br><br>
+            <button type="submit">Add entry</button></form>
+         </section>
+<section id="budget-summary">
+    <h4>Budget Summary</h4>
+    <table border="2">
+        <thead><tr>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr></thead>
+        <tbody id="budgettable"></tbody>    </table>
+</section></center>
+    
+
+    </div>
+
+<center>
+<footer>
+    <p>Personal Budget Tracker -Version 1.0</p>
+</footer></center>
+<script>
+    const budgetform =document.getElementById('budgetform');
+    const budgettable=document.getElementById('budgettable');
+
+    budgetform.addEventListener('submit',function(event){
+        event.preventDefault();
+
+        const amount=document.getElementById('Income').value;
+        const category=document.getElementById('Category').value;
+        const description=document.getElementById('Description').value;
+        const type = document.querySelector('input[name="type"]:checked').value;
+        const status = type === 'Income' ? 'completed' : 'pending';
+        const row =document.createElement('tr');
+        row.innerHTML=`
+      <td>${category}</td>
+      <td>${amount}</td>
+      <td>${description}</td>
+      <td>${status}</td>
+      <td>
+        <button class="edit">Edit</button>
+        <button class="delete">Delete</button>
+      </td>
+    `;
+
+    budgettable.appendChild(row);
+
+    row.querySelector('.delete').addEventListener('click', function() {
+      row.remove();
+    });
+
+    row.querySelector('.edit').addEventListener('click', function() {
+      document.getElementById('Income').value = amount;
+      document.getElementById('Category').value = category;
+      document.getElementById('Description').value = description;
+      document.getElementById('date').value = date;
+      
+      row.remove();
+    });
+
+    budgetform.reset();})
+  ;
+    
+</script>
+</body>
+</html>
